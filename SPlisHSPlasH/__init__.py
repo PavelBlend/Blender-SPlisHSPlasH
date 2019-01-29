@@ -9,4 +9,21 @@ bl_info = {
 }
 
 
-from .load_bgeo_cache import register, unregister
+from . import load_bgeo_cache
+from . import properties
+
+
+modules = [
+    properties,
+    load_bgeo_cache
+]
+
+
+def register():
+    for module in modules:
+        module.register()
+
+
+def unregister():
+    for module in reversed(modules):
+        module.unregister()
