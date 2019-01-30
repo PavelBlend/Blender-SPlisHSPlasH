@@ -2,8 +2,22 @@
 import bpy
 
 
-class SPlisHSplaSHProps(bpy.types.PropertyGroup):
+class SPlisHSPlasHProps(bpy.types.PropertyGroup):
     bpy_type = bpy.types.Object
+
+    is_active = bpy.props.BoolProperty(default=False, name='SPlisHSPlasH')
+    splish_slpash_type_items = [
+        ('NONE', 'None', ''),
+        ('SOLVER', 'Solver', ''),
+        ('FLUID', 'Fluid', ''),
+        ('EMITTER', 'Emitter', ''),
+        ('OBSTACLE', 'Obstacle', '')
+    ]
+    splish_slpash_type = bpy.props.EnumProperty(
+        items=splish_slpash_type_items,
+        name='Type',
+        default='NONE'
+    )
 
     # Solver
 
@@ -152,9 +166,9 @@ class SPlisHSplaSHProps(bpy.types.PropertyGroup):
         ('0', 'Box', ''),
         ('1', 'Circle', '')
     ]
-    type = bpy.props.EnumProperty(
+    emitter_type = bpy.props.EnumProperty(
         items=type_items,
-        name='Type',
+        name='Emitter Type',
         default='0'
     )
     velocity = bpy.props.FloatVectorProperty(default=(0.0, 0.0, 0.0), name='Velocity')
@@ -232,7 +246,7 @@ class SPlisHSplaSHProps(bpy.types.PropertyGroup):
 
 
 __CLASSES__ = [
-    SPlisHSplaSHProps,
+    SPlisHSPlasHProps,
 ]
 
 

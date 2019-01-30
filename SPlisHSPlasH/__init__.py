@@ -11,11 +11,15 @@ bl_info = {
 
 from . import load_bgeo_cache
 from . import properties
+from . import operators
+from . import ui
 
 
 modules = [
     properties,
-    load_bgeo_cache
+    load_bgeo_cache,
+    operators,
+    ui
 ]
 
 
