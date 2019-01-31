@@ -51,9 +51,12 @@ class SPlisHSPlasHExportSceneToJSON(bpy.types.Operator):
         data['Configuration'] = config
 
         fluids_objects = set()
+        obstacle_objects = set()
         for obj in bpy.data.objects:
             if obj.splish_splash.splish_slpash_type == 'FLUID':
                 fluids_objects.add(obj)
+            elif obj.splish_splash.splish_slpash_type == 'OBSTACLE':
+                obstacle_objects.add(obj)
 
         fluid_blocks = []
         for obj in fluids_objects:
@@ -70,6 +73,50 @@ class SPlisHSPlasHExportSceneToJSON(bpy.types.Operator):
             fluid_blocks.append(fluid)
 
         data['FluidBlocks'] = fluid_blocks
+
+        obstacles = []
+        bpy.ops.object.select_all(action='DESELECT')
+        for obj in obstacle_objects:
+            obstacle = {}
+            settings = obj.splish_splash
+
+            obj.select = True
+            path = '{}.obj'.format(obj.name)
+            bpy.ops.export_scene.obj(
+                filepath=path,
+                check_existing=True,
+                axis_forward='-Z',
+                axis_up='Y',
+                filter_glob="*.obj;*.mtl",
+                use_selection=True,
+                use_animation=False,
+                use_mesh_modifiers=True,
+                use_mesh_modifiers_render=False,
+                use_edges=False,
+                use_smooth_groups=False,
+                use_smooth_groups_bitflags=False,
+                use_normals=True,
+                use_uvs=False,
+                use_materials=False,
+                use_triangles=True,
+                use_nurbs=False,
+                use_vertex_groups=False,
+                use_blen_objects=False,
+                group_by_object=False,
+                group_by_material=False,
+                keep_vertex_order=False,
+                global_scale=1,
+                path_mode='AUTO'
+            )
+            obstacle['geometryFile'] = path
+            obstacle['isDynamic'] = False
+            obstacle['isWall'] = settings.is_wall
+            obstacle['color'] = settings.color[0], settings.color[1], settings.color[2], settings.color[3]
+            obj.select = False
+
+            obstacles.append(obstacle)
+
+        data['RigidBodies'] = obstacles
 
         json_scene = open('D:\\test_scene.json', 'w')
         json.dump(data, json_scene, indent=4, sort_keys=True)
