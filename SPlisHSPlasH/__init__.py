@@ -12,6 +12,7 @@ bl_info = {
 from . import load_bgeo_cache
 from . import properties
 from . import operators
+from . import export
 from . import ui
 
 
@@ -19,6 +20,7 @@ modules = [
     properties,
     load_bgeo_cache,
     operators,
+    export,
     ui
 ]
 

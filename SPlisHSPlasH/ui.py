@@ -181,6 +181,7 @@ class SPlisHSPlasHGeneralPanel(SPlisHSPlasHSolverPanel):
         lay = self.layout
 
         # create ui elements
+        lay.operator('splish_splash.export')
         lay.prop(splishsplash, 'splish_slpash_type')
         lay.prop(splishsplash, 'pause')
         lay.prop(splishsplash, 'pause_at')
