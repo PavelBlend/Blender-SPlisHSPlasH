@@ -176,7 +176,7 @@ class SPlisHSPlasHProps(bpy.types.PropertyGroup):
 
     # Rigid Bodies
     is_wall = bpy.props.BoolProperty(default=False, name='Is Wall')
-    color = bpy.props.FloatVectorProperty(default=(1.0, 1.0, 1.0, 1.0), name='Color', size=4)
+    color = bpy.props.FloatVectorProperty(default=(1.0, 1.0, 1.0, 1.0), name='Color', size=4, subtype='COLOR', min=0.0, max=1.0)
 
     # Fluid parameter block
     density0 = bpy.props.FloatProperty(default=1000.0, name='Density')
