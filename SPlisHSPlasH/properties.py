@@ -11,7 +11,8 @@ class SPlisHSPlasHProps(bpy.types.PropertyGroup):
         ('SOLVER', 'Solver', ''),
         ('FLUID', 'Fluid', ''),
         ('EMITTER', 'Emitter', ''),
-        ('OBSTACLE', 'Obstacle', '')
+        ('OBSTACLE', 'Obstacle', ''),
+        ('PARAMETERS', 'Parameters', '')
     ]
     splish_slpash_type = bpy.props.EnumProperty(
         items=splish_slpash_type_items,
@@ -149,6 +150,7 @@ class SPlisHSPlasHProps(bpy.types.PropertyGroup):
     cfl_max_time_step_size = bpy.props.FloatProperty(default=0.01, name='CFL Max Time Step Size')
 
     # Fluid blocks
+    parameters_object = bpy.props.StringProperty(name='Parameters Object')
     dense_mode_items = [
         ('0', 'Regular Sampling', ''),
         ('1', 'More Dense Sampling', ''),
@@ -215,7 +217,7 @@ class SPlisHSPlasHProps(bpy.types.PropertyGroup):
         default='0'
     )
     vorticity = bpy.props.FloatProperty(default=0.0, name='Vorticity')
-    viscosity_omega = bpy.props.FloatProperty(default=0.0, name='Vorticity Omega')
+    vorticity_omega = bpy.props.FloatProperty(default=0.0, name='Vorticity Omega')
     inertia_inverse = bpy.props.FloatProperty(default=0.0, name='Inertia Inverse')
 
     # Drag Force

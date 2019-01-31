@@ -2,6 +2,40 @@
 import bpy
 
 
+class SPlisHSPlasHParametersPanel(bpy.types.Panel):
+    bl_space_type = "PROPERTIES"
+    bl_region_type = "WINDOW"
+    bl_context = "physics"
+    bl_label = "SPlisHSPlasH Parameters"
+
+    @classmethod
+    def poll(cls, context):
+        splishsplash = context.object.splish_splash
+        return splishsplash.is_active and splishsplash.splish_slpash_type == 'PARAMETERS'
+
+    def draw(self, context):
+        obj = context.object
+        splishsplash = context.object.splish_splash
+        lay = self.layout
+
+        # create ui elements
+        lay.prop(splishsplash, 'splish_slpash_type')
+        lay.prop(splishsplash, 'density0')
+        lay.prop(splishsplash, 'viscosity_method')
+        lay.prop(splishsplash, 'viscosity')
+        lay.prop(splishsplash, 'visco_max_iter')
+        lay.prop(splishsplash, 'visco_max_error')
+        lay.prop(splishsplash, 'visco_max_iter_omega')
+        lay.prop(splishsplash, 'visco_max_error_omega')
+        lay.prop(splishsplash, 'viscosity_boundary')
+        lay.prop(splishsplash, 'vorticity_method')
+        lay.prop(splishsplash, 'vorticity_omega')
+        lay.prop(splishsplash, 'inertia_inverse')
+        lay.prop(splishsplash, 'drag_method')
+        lay.prop(splishsplash, 'surface_tension_method')
+        lay.prop(splishsplash, 'surface_tension')
+
+
 class SPlisHSPlasHObstaclePanel(bpy.types.Panel):
     bl_space_type = "PROPERTIES"
     bl_region_type = "WINDOW"
@@ -42,6 +76,7 @@ class SPlisHSPlasHEmitterPanel(bpy.types.Panel):
 
         # create ui elements
         lay.prop(splishsplash, 'splish_slpash_type')
+        lay.prop_search(splishsplash, 'parameters_object', bpy.data, 'objects')
         lay.prop(splishsplash, 'emitter_type')
         lay.prop(splishsplash, 'velocity')
         lay.prop(splishsplash, 'emits_per_second')
@@ -65,6 +100,7 @@ class SPlisHSPlasHFluidPanel(bpy.types.Panel):
 
         # create ui elements
         lay.prop(splishsplash, 'splish_slpash_type')
+        lay.prop_search(splishsplash, 'parameters_object', bpy.data, 'objects')
         lay.prop(splishsplash, 'dense_mode')
         lay.prop(splishsplash, 'initial_velocity')
 
@@ -242,7 +278,8 @@ __CLASSES__ = [
     SPlisHSPlasHCFLPanel,
     SPlisHSPlasHFluidPanel,
     SPlisHSPlasHEmitterPanel,
-    SPlisHSPlasHObstaclePanel
+    SPlisHSPlasHObstaclePanel,
+    SPlisHSPlasHParametersPanel
 ]
 
 
